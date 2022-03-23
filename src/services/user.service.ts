@@ -3,7 +3,6 @@ import { db } from "../database/create.database";
 
 @Injectable()
 export class UsersService {
-
   getAllUsers(): any {
     return db.prepare("SELECT * FROM users").all();
   }

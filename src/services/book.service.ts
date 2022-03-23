@@ -10,9 +10,15 @@ export class BooksService {
   }
 
   getBookById(book_id) : any {
-    return db
+    let result = db
       .prepare("SELECT * FROM books WHERE rowid = ?")
       .get(book_id);
+
+    if(result !== undefined) {
+      return result;
+    }
+
+    return {error: "Book not found."};
   }
 
   createNewBook(book) : boolean {
