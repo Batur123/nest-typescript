@@ -1,4 +1,5 @@
 import Database from "better-sqlite3";
+import { IsNotEmpty } from 'class-validator';
 
 const db = new Database('nestDatabase.db',{});
 exports.db = db;
@@ -51,11 +52,15 @@ export function startDatabaseActions() {
 
 export class BooksTableClass {
   getAllBooks() : any {
-    return db.prepare("SELECT * FROM books").all();
+    return db
+      .prepare("SELECT * FROM books")
+      .all();
   }
 
   getBookById(book_id) : any {
-    return db.prepare("SELECT * FROM books WHERE rowid = ?").get(book_id);
+    return db
+      .prepare("SELECT * FROM books WHERE rowid = ?")
+      .get(book_id);
   }
 
   createNewBook(book) : boolean {
@@ -75,17 +80,29 @@ export class BooksTableClass {
   }
 }
 
+export class LoginDto {
+  @IsNotEmpty()
+  username: string;
+
+  @IsNotEmpty()
+  password: string;
+}
+
 export class UsersTableClass {
   getAllUsers(): any {
     return db.prepare("SELECT * FROM users").all();
   }
 
-  authenticateUser(username, password): boolean {
-    return db.prepare("SELECT * FROM users WHERE username = ? AND password = ?").get(username, password) !== undefined;
+  authenticateUser(loginDto): boolean {
+    return db
+      .prepare("SELECT * FROM users WHERE username = ? AND password = ?")
+      .get(loginDto.username, loginDto.password) !== undefined;
   }
 
   getUserById(user_id): any {
-    return db.prepare("SELECT * FROM users WHERE rowid = ?").get(user_id);
+    return db
+      .prepare("SELECT * FROM users WHERE rowid = ?")
+      .get(user_id);
   }
 
   deleteUserById(user_id): boolean {
