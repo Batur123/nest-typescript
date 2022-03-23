@@ -6,7 +6,7 @@ export const db = new Database('nestDatabase.db',{});
 function createBooksTable() {
   console.log("[Info]: Running createBooksTable function for debug test.");
 
-  db.prepare('CREATE TABLE IF NOT EXISTS books (book_name TEXT, book_author TEXT, page_number TEXT, publish_date INTEGER)')
+  db.prepare('CREATE TABLE IF NOT EXISTS books (book_name TEXT, book_author TEXT, page_number INTEGER, publish_date INTEGER)')
     .run();
 
   const selectBooksTable = db.prepare("SELECT * FROM books").all();
@@ -48,12 +48,3 @@ export function startDatabaseActions() {
   createBooksTable();
   createUsersTable();
 }
-
-export class LoginDto {
-  @IsNotEmpty()
-  username: string;
-
-  @IsNotEmpty()
-  password: string;
-}
-

@@ -21,12 +21,12 @@ export class BooksService {
     return {error: "Book not found."};
   }
 
-  createNewBook(book) : boolean {
+  createNewBook(bookDto) : boolean {
     let result = db
       .prepare("INSERT INTO books (book_name, book_author, page_number, publish_date) VALUES (?,?,?,?)")
-      .run(book.name,book.author,book.page_number,book.publish_date);
+      .run(bookDto.book_name,bookDto.book_author,bookDto.page_number,bookDto.publish_date);
 
-    return result.changes;
+    return result.changes === 1;
   }
 
   deleteBookById(book_id) : boolean {

@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { BooksService } from "../services/book.service";
+import { CreateBookDto } from "../dto/dtos";
 
 @Controller('books')
 export class BookController {
@@ -13,5 +14,15 @@ export class BookController {
   @Get(':id')
   getOneById(@Param() params) : any {
     return this.bookClass.getBookById(params.id)
+  }
+
+  @Post()
+  createBook(@Body() createBookDto: CreateBookDto) {
+
+    if(this.bookClass.createNewBook(createBookDto)) {
+      return 'New book created.';
+    }
+
+    return 'Error';
   }
 }
