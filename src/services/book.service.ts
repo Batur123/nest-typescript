@@ -4,9 +4,15 @@ import { db } from "../database/create.database";
 @Injectable()
 export class BooksService {
   getAllBooks() : any {
-    return db
+    let result = db
       .prepare("SELECT * FROM books")
       .all();
+
+    if(result.length !== 0) {
+      return result;
+    }
+
+    return {error: "Books are empty."};
   }
 
   getBookById(book_id) : any {

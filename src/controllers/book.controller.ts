@@ -18,7 +18,6 @@ export class BookController {
 
   @Post()
   createBook(@Body() createBookDto: CreateBookDto) {
-
     if(this.bookClass.createNewBook(createBookDto)) {
       return 'New book created.';
     }
