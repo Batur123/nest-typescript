@@ -1,24 +1,25 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from "@nestjs/common";
 import { BooksService } from "../services/book.service";
 import { CreateBookDto } from "../dto/dtos";
 
 @Controller('books')
 export class BookController {
-  constructor(private bookClass: BooksService) {}
+  constructor(private bookClass: BooksService) {
+  }
 
   @Get()
-  getAll() : any {
+  getAll(): any {
     return this.bookClass.getAllBooks();
   }
 
   @Get(':id')
-  getOneById(@Param() params) : any {
-    return this.bookClass.getBookById(params.id)
+  getOneById(@Param('id',ParseIntPipe) id: number): any {
+    return this.bookClass.getBookById(id)
   }
 
   @Post()
   createBook(@Body() createBookDto: CreateBookDto) {
-    if(this.bookClass.createNewBook(createBookDto)) {
+    if (this.bookClass.createNewBook(createBookDto)) {
       return 'New book created.';
     }
 
