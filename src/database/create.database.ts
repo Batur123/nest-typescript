@@ -53,6 +53,26 @@ export class BooksTableClass {
   getAllBooks() : any {
     return db.prepare("SELECT * FROM books").all();
   }
+
+  getBookById(book_id) : any {
+    return db.prepare("SELECT * FROM books WHERE rowid = ?").get(book_id);
+  }
+
+  createNewBook(book) : boolean {
+    let result = db
+      .prepare("INSERT INTO books (book_name, book_author, page_number, publish_date) VALUES (?,?,?,?)")
+      .run(book.name,book.author,book.page_number,book.publish_date);
+
+    return result.changes;
+  }
+
+  deleteBookById(book_id) : boolean {
+    let result = db
+      .prepare("DELETE FROM books WHERE rowid = ?")
+      .run(book_id);
+
+    return result.changes;
+  }
 }
 
 export class UsersTableClass {
@@ -62,5 +82,17 @@ export class UsersTableClass {
 
   authenticateUser(username, password): boolean {
     return db.prepare("SELECT * FROM users WHERE username = ? AND password = ?").get(username, password) !== undefined;
+  }
+
+  getUserById(user_id): any {
+    return db.prepare("SELECT * FROM users WHERE rowid = ?").get(user_id);
+  }
+
+  deleteUserById(user_id): boolean {
+    let result = db
+      .prepare("DELETE FROM users WHERE rowid = ?")
+      .run(user_id);
+
+    return result.changes;
   }
 }
