@@ -49,14 +49,18 @@ export function startDatabaseActions() {
   createUsersTable();
 }
 
-export class booksTableClass {
+export class BooksTableClass {
   getAllBooks() : any {
     return db.prepare("SELECT * FROM books").all();
   }
 }
 
-export class usersTableClass {
-  getAllUsers() : any {
+export class UsersTableClass {
+  getAllUsers(): any {
     return db.prepare("SELECT * FROM users").all();
+  }
+
+  authenticateUser(username, password): boolean {
+    return db.prepare("SELECT * FROM users WHERE username = ? AND password = ?").get(username, password) !== undefined;
   }
 }
