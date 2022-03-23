@@ -5,7 +5,7 @@ import { db } from "../database/create.database";
 export class BooksService {
   getAllBooks() : any {
     let result = db
-      .prepare("SELECT * FROM books")
+      .prepare("SELECT rowid,* FROM books")
       .all();
 
     if(result.length !== 0) {
@@ -40,6 +40,6 @@ export class BooksService {
       .prepare("DELETE FROM books WHERE rowid = ?")
       .run(book_id);
 
-    return result.changes;
+    return result.changes === 1;
   }
 }
