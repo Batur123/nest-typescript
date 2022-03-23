@@ -19,10 +19,6 @@ export class BookController {
 
   @Post()
   createBook(@Body() createBookDto: CreateBookDto) {
-    if (this.bookClass.createNewBook(createBookDto)) {
-      return 'New book created.';
-    }
-
-    return 'Error';
+    return this.bookClass.createNewBook(createBookDto) ? "New book created." : 'Error';
   }
 }
