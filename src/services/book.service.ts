@@ -57,7 +57,6 @@ export class BooksService {
   Experimental
   -> Prevent SQL Injections
   -> Dynamic Updating Fixes
- 
    */
   updateBookById(book_id: number, booksDto: object): object {
 
@@ -73,23 +72,19 @@ export class BooksService {
     }
 
     let dynamicQuery = "UPDATE books SET ";
-    let values = "";
-
     for (let booksDtoKey in booksDto) {
-      dynamicQuery += `${booksDtoKey} = ?,`;
-      values += booksDto[booksDtoKey]+",";
+      dynamicQuery += `${booksDtoKey}=@${booksDtoKey},`;
     }
-
-    dynamicQuery = dynamicQuery.slice(0, -1) + " WHERE rowid = ?";
-    values = values.slice(0,-1) + "," + book_id;
-
-    console.log(values);
-    console.log(dynamicQuery);
+    dynamicQuery = dynamicQuery.slice(0, -1) + " WHERE rowid=@rowid";
+    Object.assign(booksDto,{'rowid': book_id})
 
     let result = db
-      .prepare(dynamicQuery).run(...values)
+      .prepare(dynamicQuery).run(booksDto)
 
-    return result.changes === 1 ? { status: 200, error: `Book number ${book_id} has been updated.` } : { status: 404, error: `Update failed.` }
+    console.log(booksDto);
+    console.log(result.changes);
+    console.log(dynamicQuery);
+    return { status: 200, message: `Book number ${book_id} has been updated.` };
   }
 
   deleteBookById(book_id: number): boolean {
