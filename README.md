@@ -1,7 +1,8 @@
 ### Nest.JS, Better-SQLite3, TypeScript
 
 ## Routes
-GET ('/books') - Get All Books<br>
+GET ('/books') - Get All Books <br>
+<br>
 GET ('/books?sortBy=value') - Get All Books - Sort By Column (ASC) <br>
 Acceptable Values: id, book_author, page_number, book_name <br>
 Example; http://localhost:3000/books?sortBy=id <br>
