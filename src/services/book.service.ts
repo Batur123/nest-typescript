@@ -52,7 +52,7 @@ export class BooksService {
 
     return { error: "Book not found." };
   }
-  
+
   updateBookById(book_id: number, booksDto: object): object {
 
     if (Object.keys(booksDto).length === 0) {

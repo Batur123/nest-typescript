@@ -51,7 +51,6 @@ export class UpdateBookDto {
   @Type(() => Number)
   @Min(0)
   @Max(2147483647)
-  @Type(() => Number)
   readonly page_number: number;
 
   @IsOptional()
