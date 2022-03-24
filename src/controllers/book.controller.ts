@@ -8,10 +8,12 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
-  Post
+  Post, Req
 } from "@nestjs/common";
 import { BooksService } from "../services/book.service";
 import { CreateBookDto } from "../dto/dtos";
+import { Request } from 'express';
+import { IsEmpty } from "class-validator";
 
 @Controller('books')
 export class BookController {
@@ -20,8 +22,8 @@ export class BookController {
 
   @Get()
   @HttpCode(200)
-  getAll() {
-    return this.bookClass.getAllBooks();
+  getAll(@Req() request: Request) : string {
+    return request.query?.sortBy === undefined ? this.bookClass.getAllBooks() : this.bookClass.getAllBooks(request.query.sortBy.toString());
   }
 
   @Get(':id')
