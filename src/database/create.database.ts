@@ -3,6 +3,13 @@ import { IsNotEmpty } from 'class-validator';
 
 export const db = new Database('nestDatabase.db',{});
 
+/*
+function* toRows(stmt) {
+  yield stmt.columns().map(column => column.name);
+  yield* stmt.raw().iterate();
+}
+*/
+
 function createBooksTable() {
   console.log("[Info]: Running createBooksTable function for debug test.");
 

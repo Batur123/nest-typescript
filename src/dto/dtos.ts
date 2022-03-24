@@ -1,4 +1,15 @@
-import { IsDate, IsInt, IsNotEmpty, IsNumber, IsString, Max, Min } from "class-validator";
+import {
+  IsDate,
+  IsDefined,
+  IsEmpty,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min
+} from "class-validator";
 import { Transform, Type } from "class-transformer";
 
 export class LoginDto {
@@ -26,5 +37,23 @@ export class CreateBookDto {
   readonly page_number: number;
 
   @IsNotEmpty()
+  readonly publish_date: string;
+}
+
+export class UpdateBookDto {
+  @IsOptional()
+  readonly book_name: string;
+  @IsOptional()
+  readonly book_author: string;
+
+  @IsOptional()
+  @IsInt()
+  @Type(() => Number)
+  @Min(0)
+  @Max(2147483647)
+  @Type(() => Number)
+  readonly page_number: number;
+
+  @IsOptional()
   readonly publish_date: string;
 }

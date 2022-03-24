@@ -8,12 +8,11 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
-  Post, Req
+  Post, Put, Req
 } from "@nestjs/common";
 import { BooksService } from "../services/book.service";
-import { CreateBookDto } from "../dto/dtos";
+import { CreateBookDto,UpdateBookDto } from "../dto/dtos";
 import { Request } from 'express';
-import { IsEmpty } from "class-validator";
 
 @Controller('books')
 export class BookController {
@@ -36,6 +35,12 @@ export class BookController {
   @HttpCode(201)
   createBook(@Body() createBookDto: CreateBookDto) {
     return this.bookClass.createNewBook(createBookDto) ? "New book created." : 'Error';
+  }
+
+  @Put(':id')
+  @HttpCode(202)
+  updateBookByID(@Param('id', ParseIntPipe) id: number,@Body() updateBookDto: UpdateBookDto) {
+    return this.bookClass.updateBookById(id,updateBookDto)
   }
 
   @Delete(':id')

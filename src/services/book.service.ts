@@ -53,19 +53,43 @@ export class BooksService {
     return { error: "Book not found." };
   }
 
-  updateBookById(book_id: number,params: object): boolean {
+  /*
+  Experimental
+  -> Prevent SQL Injections
+  -> Dynamic Updating Fixes
+ 
+   */
+  updateBookById(book_id: number, booksDto: object): object {
+
+    if (Object.keys(booksDto).length === 0) {
+      return { status: 404, error: `Parameters are empty.` };
+    }
+
     let selectBook = db
       .prepare("SELECT * FROM books WHERE rowid = ?").get(book_id);
 
-    if(selectBook === undefined) {
-      return false;
+    if (selectBook === undefined) {
+      return { status: 404, error: `There is no book with ${book_id} id number.` };
     }
 
-    let result = db
-      .prepare("UPDATE books SET book_name = ?, book_author = ?, page_number = ?, publish_date = ?")
-      .run();
+    let dynamicQuery = "UPDATE books SET ";
+    let values = "";
 
-    return result.changes === 1;
+    for (let booksDtoKey in booksDto) {
+      dynamicQuery += `${booksDtoKey} = ?,`;
+      values += booksDto[booksDtoKey]+",";
+    }
+
+    dynamicQuery = dynamicQuery.slice(0, -1) + " WHERE rowid = ?";
+    values = values.slice(0,-1) + "," + book_id;
+
+    console.log(values);
+    console.log(dynamicQuery);
+
+    let result = db
+      .prepare(dynamicQuery).run(...values)
+
+    return result.changes === 1 ? { status: 200, error: `Book number ${book_id} has been updated.` } : { status: 404, error: `Update failed.` }
   }
 
   deleteBookById(book_id: number): boolean {
@@ -75,6 +99,4 @@ export class BooksService {
 
     return result.changes === 1;
   }
-
-
 }
