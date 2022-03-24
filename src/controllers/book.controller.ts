@@ -25,7 +25,7 @@ export class BookController {
   getAll(@Req() request: Request) : string {
     return request.query?.sortBy === undefined ? this.bookClass.getAllBooks() : this.bookClass.getAllBooks(request.query.sortBy.toString());
   }
-  
+
   @Get(':id')
   @HttpCode(200)
   getOneById(@Param('id', ParseIntPipe) id: number) {
@@ -49,7 +49,7 @@ export class BookController {
     } else {
       throw new HttpException({
         status: HttpStatus.NOT_FOUND,
-        error: 'There is no book with ' + id + " id number.",
+        error: `There is no book with ${id} id number.`,
       }, HttpStatus.NOT_FOUND);
     }
   }
