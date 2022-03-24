@@ -23,9 +23,9 @@ ACCEPT: x-www-form-urlencoded<br>
 <br>
 DELETE ('/books/:param_id') Delete Book By ID <br>
 <br>
-[WIP] <br>
 PUT ('books/:param_id') Update Book By ID <br>
 ACCEPT: x-www-form-urlencoded <br>
+Note: Params are optional. You don't have to enter all of these. <br>
 @param1: book_name<br>
 @param2: book_author<br>
 @param3: page_number<br>
