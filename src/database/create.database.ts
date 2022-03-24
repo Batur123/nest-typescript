@@ -47,4 +47,5 @@ function createUsersTable() {
 export function startDatabaseActions() {
   createBooksTable();
   createUsersTable();
+  db.exec("VACUUM;");
 }

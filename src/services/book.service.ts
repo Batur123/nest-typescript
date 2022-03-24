@@ -14,6 +14,11 @@ export class BooksService {
           querySQL += " ORDER BY " + sortBy + " ASC";
           break;
         }
+
+        case 'id': {
+          querySQL += " ORDER BY rowid ASC";
+          break;
+        }
       }
     }
 
