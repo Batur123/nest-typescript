@@ -20,3 +20,6 @@ POST ('/login') <br>
 ACCEPT: x-www-form-urlencoded<br>
 @param1: username<br>
 @param2: password<br>
+<br>
+DELETE ('/books/:param_id') Delete Book By ID <br>
+
