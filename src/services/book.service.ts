@@ -72,18 +72,17 @@ export class BooksService {
     }
 
     let dynamicQuery = "UPDATE books SET ";
+
     for (let booksDtoKey in booksDto) {
       dynamicQuery += `${booksDtoKey}=@${booksDtoKey},`;
     }
+
     dynamicQuery = dynamicQuery.slice(0, -1) + " WHERE rowid=@rowid";
-    Object.assign(booksDto,{'rowid': book_id})
+    Object.assign(booksDto, { 'rowid': book_id })
 
     let result = db
       .prepare(dynamicQuery).run(booksDto)
 
-    console.log(booksDto);
-    console.log(result.changes);
-    console.log(dynamicQuery);
     return { status: 200, message: `Book number ${book_id} has been updated.` };
   }
 
