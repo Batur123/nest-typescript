@@ -52,12 +52,7 @@ export class BooksService {
 
     return { error: "Book not found." };
   }
-
-  /*
-  Experimental
-  -> Prevent SQL Injections
-  -> Dynamic Updating Fixes
-   */
+  
   updateBookById(book_id: number, booksDto: object): object {
 
     if (Object.keys(booksDto).length === 0) {
@@ -78,10 +73,9 @@ export class BooksService {
     }
 
     dynamicQuery = dynamicQuery.slice(0, -1) + " WHERE rowid=@rowid";
-    Object.assign(booksDto, { 'rowid': book_id })
+    Object.assign(booksDto, { 'rowid': book_id });
 
-    let result = db
-      .prepare(dynamicQuery).run(booksDto)
+    db.prepare(dynamicQuery).run(booksDto);
 
     return { status: 200, message: `Book number ${book_id} has been updated.` };
   }
