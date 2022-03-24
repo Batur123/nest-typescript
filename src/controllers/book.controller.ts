@@ -25,7 +25,7 @@ export class BookController {
   getAll(@Req() request: Request) : string {
     return request.query?.sortBy === undefined ? this.bookClass.getAllBooks() : this.bookClass.getAllBooks(request.query.sortBy.toString());
   }
-
+  
   @Get(':id')
   @HttpCode(200)
   getOneById(@Param('id', ParseIntPipe) id: number) {

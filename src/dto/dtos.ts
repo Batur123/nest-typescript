@@ -1,6 +1,5 @@
 import { IsDate, IsInt, IsNotEmpty, IsNumber, IsString, Max, Min } from "class-validator";
 import { Transform, Type } from "class-transformer";
-import moment from "moment";
 
 export class LoginDto {
   @IsNotEmpty()
@@ -11,7 +10,9 @@ export class LoginDto {
 }
 
 export class CreateBookDto {
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: '\'book_name\' parameter can\'t be empty.', //Custom Message for Validator
+  })
   readonly book_name: string;
 
   @IsNotEmpty()
