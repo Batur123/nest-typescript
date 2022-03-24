@@ -2,6 +2,8 @@
 
 ## Routes
 GET ('/books') Get All Books<br>
+GET ('/books?sortBy=value'); Get All Books - Sort By Column (ASC) <br>
+Acceptable Values: book_author, page_number, book_name <br>
 <br>
 GET ('/books/:param_id') Get Book By ID<br>
 <br>
