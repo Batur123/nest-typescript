@@ -6,18 +6,22 @@
 </head>
 <body>
   <div>
-    {{#each booksListJson}}
-      <div class="row">
-        <div class="col-md-12">
-          <h2>Book ID: {{rowid}}</h2>
-          <h3>Book Name: {{book_name}}</h3>
-          <h3>Author: {{book_author}}</h3>
-          <h3>Page Number: {{page_number}}</h3>
-          <h3>Publish_Date: {{publish_date}}</h3>
+    {{#if isBooksEmpty}}
+      <p>There is no book available at this time.</p>
+    {{else}}
+      {{#each booksListJson}}
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Book ID: {{rowid}}</h2>
+            <h3>Book Name: {{book_name}}</h3>
+            <h3>Author: {{book_author}}</h3>
+            <h3>Page Number: {{page_number}}</h3>
+            <h3>Publish_Date: {{publish_date}}</h3>
+          </div>
           <hr>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    {{/if}}
   </div>
 </body>
 </html>

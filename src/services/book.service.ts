@@ -26,11 +26,7 @@ export class BooksService {
       .prepare(querySQL)
       .all();
 
-    if (result.length !== 0) {
-      return result;
-    }
-
-    return { error: "Books are empty." };
+    return result;
   }
 
   createNewBook(bookDto): boolean {

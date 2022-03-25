@@ -5,11 +5,14 @@ export const rootRouteName = 'index';
 
 @Controller()
 export class AppController {
-  constructor(private readonly booksService: BooksService) {}
+  constructor(private readonly booksService: BooksService) {
+  }
 
   @Get()
   @Render(rootRouteName)
   getRoot(): object {
-    return {booksListJson: this.booksService.getAllBooks()};
+    let booksList = this.booksService.getAllBooks();
+    let isEmpty = booksList.length === 0;
+    return { booksListJson: booksList, isBooksEmpty: isEmpty };
   }
 }
