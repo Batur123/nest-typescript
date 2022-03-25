@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, UnauthorizedException } from "@nestjs/common";
 import { LoginDto } from "../dto/dtos";
 import { UsersService } from "../services/user.service";
 
@@ -16,6 +16,6 @@ export class LoginController {
       return "Username and password accepted.";
     }
 
-    return "Wrong username or password.";
+    throw new UnauthorizedException();
   }
 }
