@@ -5,13 +5,14 @@ import moment from "moment";
 @Injectable()
 export class BooksService {
   getAllBooks(sortBy?: string): any {
-    let querySQL = "SELECT rowid,* FROM books";
+    let querySQL = "SELECT rowid,book_name,book_author,page_number,DATETIME(ROUND(publish_date) / 1000, 'unixepoch') AS publish_date FROM books";
 
     if (sortBy !== undefined) {
       switch (sortBy) {
         case 'book_author':
         case 'page_number':
-        case 'book_name': {
+        case 'book_name':
+        case 'publish_date': {
           querySQL += " ORDER BY " + sortBy + " ASC";
           break;
         }
@@ -27,9 +28,9 @@ export class BooksService {
       .prepare(querySQL)
       .all();
 
-    Object.keys(result).forEach(key => {
-      result[key].publish_date = moment.unix(result[key].publish_date/1000).format("DD-MM-YYYY HH:mm:ss")
-    });
+   /* Object.keys(result).forEach(key => {
+      result[key].publish_date = moment.unix(result[key].publish_date / 1000).format("DD-MM-YYYY HH:mm:ss")
+    });*/
 
     return result;
   }
