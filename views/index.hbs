@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>App</title>
+</head>
+<body>
+  <div>
+    {{#each booksListJson}}
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Book ID: {{rowid}}</h2>
+          <h3>Book Name: {{book_name}}</h3>
+          <h3>Author: {{book_author}}</h3>
+          <h3>Page Number: {{page_number}}</h3>
+          <h3>Publish_Date: {{publish_date}}</h3>
+          <hr>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</body>
+</html>

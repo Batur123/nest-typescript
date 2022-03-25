@@ -1,13 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from '../services/app.service';
+import { Controller, Get, Render } from "@nestjs/common";
+import { BooksService } from "../services/book.service";
 
-// Root Page (index)
+export const rootRouteName = 'index';
+
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly booksService: BooksService) {}
 
   @Get()
-  getRoot(): string {
-    return "test";
+  @Render(rootRouteName)
+  getRoot(): object {
+    return {booksListJson: this.booksService.getAllBooks()};
   }
 }
