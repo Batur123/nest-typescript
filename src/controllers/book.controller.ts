@@ -14,7 +14,9 @@ import { BooksService } from "../services/book.service";
 import { CreateBookDto,UpdateBookDto } from "../dto/dtos";
 import { Request } from 'express';
 
-@Controller('books')
+export const booksRouteName = 'books';
+
+@Controller(booksRouteName)
 export class BookController {
   constructor(private bookClass: BooksService) {
   }

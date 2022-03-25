@@ -2,7 +2,9 @@ import { Body, Controller, Post } from "@nestjs/common";
 import { LoginDto } from "../dto/dtos";
 import { UsersService } from "../services/user.service";
 
-@Controller('login')
+export const loginRouteName = 'login';
+
+@Controller(loginRouteName)
 export class LoginController {
   constructor(private userClass: UsersService) {}
 
