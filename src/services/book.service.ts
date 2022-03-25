@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { db } from "../database/create.database";
+import moment from "moment";
 
 @Injectable()
 export class BooksService {
@@ -25,6 +26,10 @@ export class BooksService {
     let result = db
       .prepare(querySQL)
       .all();
+
+    Object.keys(result).forEach(key => {
+      result[key].publish_date = moment.unix(result[key].publish_date/1000).format("DD-MM-YYYY HH:mm:ss")
+    });
 
     return result;
   }
