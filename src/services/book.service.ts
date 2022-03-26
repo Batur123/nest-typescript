@@ -24,15 +24,7 @@ export class BooksService {
       }
     }
 
-    let result = db
-      .prepare(querySQL)
-      .all();
-
-   /* Object.keys(result).forEach(key => {
-      result[key].publish_date = moment.unix(result[key].publish_date / 1000).format("DD-MM-YYYY HH:mm:ss")
-    });*/
-
-    return result;
+    return db.prepare(querySQL).all();
   }
 
   createNewBook(bookDto): boolean {
