@@ -8,9 +8,9 @@ import {
   IsOptional,
   IsString,
   Max,
-  Min
-} from "class-validator";
-import { Transform, Type } from "class-transformer";
+  Min,
+} from 'class-validator';
+import { Transform, Type } from 'class-transformer';
 
 export class LoginDto {
   @IsNotEmpty()
@@ -22,7 +22,7 @@ export class LoginDto {
 
 export class CreateBookDto {
   @IsNotEmpty({
-    message: '\'book_name\' parameter can\'t be empty.', //Custom Message for Validator
+    message: "'book_name' parameter can't be empty.", //Custom Message for Validator
   })
   readonly book_name: string;
 
