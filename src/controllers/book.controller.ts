@@ -23,7 +23,7 @@ export class BookController {
 
   @Get()
   @HttpCode(200)
-  getAll(@Req() request: Request) : string {
+  getAll(@Req() request: Request): string {
     return request.query?.sortBy === undefined ? this.bookClass.getAllBooks() : this.bookClass.getAllBooks(request.query.sortBy.toString());
   }
 
@@ -41,8 +41,8 @@ export class BookController {
 
   @Put(':id')
   @HttpCode(202)
-  updateBookByID(@Param('id', ParseIntPipe) id: number,@Body() updateBookDto: UpdateBookDto) {
-    return this.bookClass.updateBookById(id,updateBookDto)
+  updateBookByID(@Param('id', ParseIntPipe) id: number, @Body() updateBookDto: UpdateBookDto) {
+    return this.bookClass.updateBookById(id, updateBookDto)
   }
 
   @Delete(':id')

@@ -12,6 +12,7 @@ export class AppController {
   @Render(rootRouteName)
   getRoot(): object {
     let booksList = this.booksService.getAllBooks();
-    return { booksListJson: booksList, isBooksEmpty: booksList.length === 0 };
+    let isEmpty = booksList.length === 0;
+    return { booksListJson: booksList, isBooksEmpty: isEmpty };
   }
 }
