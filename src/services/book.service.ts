@@ -36,7 +36,7 @@ export class BooksService {
 
   getBookById(book_id: number): any {
     let result = db
-      .prepare("SELECT * FROM books WHERE rowid = ?")
+      .prepare("SELECT rowid as id,* FROM books WHERE rowid = ?")
       .get(book_id);
 
     return result ? result : { status: 404, error: "Book not found." };

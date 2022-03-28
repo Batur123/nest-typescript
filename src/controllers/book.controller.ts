@@ -53,11 +53,12 @@ export class BookController {
         status: 200,
         message: 'Book successfully deleted.'
       };
-    } else {
-      throw new HttpException({
-        status: HttpStatus.NOT_FOUND,
-        error: `There is no book with ${id} id number.`,
-      }, HttpStatus.NOT_FOUND);
     }
+
+    throw new HttpException({
+      status: HttpStatus.NOT_FOUND,
+      error: `There is no book with ${id} id number.`,
+    }, HttpStatus.NOT_FOUND);
+
   }
 }
