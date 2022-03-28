@@ -39,11 +39,7 @@ export class BooksService {
       .prepare("SELECT * FROM books WHERE rowid = ?")
       .get(book_id);
 
-    if (result !== undefined) {
-      return result;
-    }
-
-    return { error: "Book not found." };
+    return result ? result : { status: 404, error: "Book not found." };
   }
 
   updateBookById(book_id: number, booksDto: object): object {
