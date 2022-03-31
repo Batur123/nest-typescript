@@ -14,7 +14,9 @@ async function bootstrap() {
     AppModule,
   );
 
-  app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.useStaticAssets(join(__dirname, '..', 'public'),{
+    prefix: '/public/',
+  });
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
 

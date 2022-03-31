@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsDate,
   IsDefined,
   IsEmpty,
@@ -8,16 +9,16 @@ import {
   IsOptional,
   IsString,
   Max,
-  Min,
-} from 'class-validator';
+  Min
+} from "class-validator";
 import { Transform, Type } from 'class-transformer';
 
 export class LoginDto {
   @IsNotEmpty()
-  username: string;
+  readonly username: string;
 
   @IsNotEmpty()
-  password: string;
+  readonly password: string;
 }
 
 export class CreateBookDto {

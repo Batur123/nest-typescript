@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>App</title>
+</head>
+<body>
+<form action="books" method="get">
+  <div class="container" style="width:800px; margin:0 auto;">
+    <label for="uname"><b>Sort Books By:</b></label>
+    <input type="text" placeholder="id, book_author, page_number, book_name, publish_date" name="sortBy" size="45">
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+<div>
+  {{#if isBooksEmpty}}
+    <p>There is no book available at this time.</p>
+  {{else}}
+    {{#each booksListJson}}
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Book ID: {{rowid}}</h2>
+          <h3>Book Name: {{book_name}}</h3>
+          <h3>Author: {{book_author}}</h3>
+          <h3>Page Number: {{page_number}}</h3>
+          <h3>Publish Date: {{publish_date}}</h3>
+          <a href="books/{{rowid}}" class="button">Get JSON Response</a>
+        </div>
+        <hr>
+      </div>
+    {{/each}}
+  {{/if}}
+</div>
+</body>
+</html>

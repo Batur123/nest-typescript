@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UnauthorizedException } from "@nestjs/common";
+import { Body, Controller, Post, Res, UnauthorizedException } from "@nestjs/common";
 import { LoginDto } from "../dto/dtos";
 import { UsersService } from "../services/user.service";
 
@@ -9,13 +9,12 @@ export class LoginController {
   constructor(private userClass: UsersService) {}
 
   @Post()
-  loginEvent(@Body() loginDto: LoginDto): string {
-    console.log(loginDto);
-
+  loginEvent(@Body() loginDto: LoginDto,@Res() response): string {
     if(this.userClass.authenticateUser(loginDto)) {
-      return "Username and password accepted.";
+      response.redirect('/books');
     }
 
-    throw new UnauthorizedException();
+    return "Wrong username or password.";
+    //throw new UnauthorizedException();
   }
 }

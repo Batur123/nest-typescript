@@ -8,7 +8,7 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
-  Post, Put, Req
+  Post, Put, Render, Req
 } from "@nestjs/common";
 import { BooksService } from "../services/book.service";
 import { CreateBookDto,UpdateBookDto } from "../dto/dtos";
@@ -23,8 +23,11 @@ export class BookController {
 
   @Get()
   @HttpCode(200)
-  getAll(@Req() request: Request): string {
-    return request.query?.sortBy === undefined ? this.bookClass.getAllBooks() : this.bookClass.getAllBooks(request.query.sortBy.toString());
+  @Render(booksRouteName)
+  getRoot(@Req() request: Request): object {
+    let booksList : any = request.query?.sortBy === undefined ? this.bookClass.getAllBooks() : this.bookClass.getAllBooks(request.query.sortBy.toString());
+    let isEmpty : boolean = booksList.length === 0;
+    return { booksListJson: booksList, isBooksEmpty: isEmpty };
   }
 
   @Get(':id')

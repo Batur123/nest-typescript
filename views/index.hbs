@@ -4,25 +4,19 @@
   <meta charset="utf-8" />
   <title>App</title>
 </head>
-<body>
-  <div>
-    {{#if isBooksEmpty}}
-      <p>There is no book available at this time.</p>
-    {{else}}
-      {{#each booksListJson}}
-        <div class="row">
-          <div class="col-md-12">
-            <h2>Book ID: {{rowid}}</h2>
-            <h3>Book Name: {{book_name}}</h3>
-            <h3>Author: {{book_author}}</h3>
-            <h3>Page Number: {{page_number}}</h3>
-            <h3>Publish Date: {{publish_date}}</h3>
-            <a href="books/{{rowid}}" class="button">Get JSON Response</a>
-          </div>
-          <hr>
-        </div>
-      {{/each}}
-    {{/if}}
+<body style="background-image: url('./public/images/login-page-image.jpg'); background-repeat: no-repeat; background-attachment: fixed;
+  background-size: cover;)">
+
+<form action="login" method="post">
+  <div class="container" style="width:800px; margin:0 auto;">
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username">
+
+    <label for="password"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password">
+
+    <button type="submit">Login</button>
   </div>
+</form>
 </body>
 </html>
