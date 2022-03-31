@@ -25,6 +25,7 @@ export class BookController {
   @HttpCode(200)
   @Render(booksRouteName)
   getRoot(@Req() request: Request): object {
+    console.log(request);
     let booksList : any = request.query?.sortBy === undefined ? this.bookClass.getAllBooks() : this.bookClass.getAllBooks(request.query.sortBy.toString());
     let isEmpty : boolean = booksList.length === 0;
     return { booksListJson: booksList, isBooksEmpty: isEmpty };
